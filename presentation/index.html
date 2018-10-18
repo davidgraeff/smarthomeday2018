@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>reveal.js</title>
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/league.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section class="center">
+				<h2>MQTT in <img style="border:0;box-shadow: none; background: none;margin:0;vertical-align:middle" src="img/eclipse_logo.png"></h2>
+
+			</section>
+			<section>Slide 1
+				<div class="fig-container" data-file="http://localhost:8080/paperui/index.html#/control?tab=other" data-style="height: 500px;"></div>
+
+				<aside class="notes" data-markdown>
+					Oh hey, these are some notes.
+
+					They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit »S« on your
+					keyboard).
+				</aside>
+			</section>
+
+			<section class="center">Slide 2</section>
+
+			<section>Terminal
+				<div>
+					<div style="float:left;width:49%;" class="fig-container" data-file="http://localhost:8080/paperui/index.html#/inbox/search"
+					 data-style="height: 500px;"></div>
+					<div style="float:right;width:49%;" class="fig-container" data-file="http://localhost:8090" data-style="height: 500px;"></div>
+				</div>
+			</section>
+
+			<section data-markdown class="center">
+				<textarea data-template>
+                        ## Page title
+
+                        A paragraph with some text and a [link](http://hakim.se).
+                    </textarea>
+			</section>
+		</div>
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
+		document.domain = "localhost";
+		Reveal.initialize({
+			controlsTutorial: false,
+			center: false,
+			transition: 'concave',
+			mouseWheel: true,
+			width: 960,
+			height: 700,
+			margin: 0.05,
+			viewDistance: 20,
+			progress: false,
+			reveald3: {
+				keepIframe: true,
+				runLastState: false
+			},
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: 'node_modules/reveald3/reveald3.js' }
+			]
+		});
+	</script>
+</body>
+
+</html>
