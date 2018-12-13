@@ -1,4 +1,4 @@
-# MQTT arrives in the modern openHAB 2.x architecure
+# MQTT Arrives in the Modern openHAB 2.x Architecture
 
 If you haven't heared about MQTT yet, it is probably time to have a [look](https://en.wikipedia.org/wiki/MQTT). Quoting Wikipedia here:
 
@@ -90,7 +90,7 @@ MQTT broker, ready to use.
 
 ![Configure embedded MQTT Broker](esh_embedded_configure.png "Configure embedded MQTT Broker")
 
-#### Broker connection status
+#### Broker Connection Status
 
 Internally the extension knows what is going on and why a broker connection fails.
 May it be wrong credentials, a denied tcp connection (i.e. firewall) or a maximum connection limit.
@@ -103,7 +103,7 @@ logging it, the reason is now directly presented to you via the Thing status:
 This also means, the status is available for the automation rule engine to e.g.
 react on a failing broker connection.
 
-#### System broker connections for openHAB distributions
+#### System Broker Connections for openHAB Distributions
 
 This section is targeting distributors.
 You may skip to the next exiting feature of MQTT Thing autodiscovery if you are not interested in bundling openHAB.
@@ -138,7 +138,7 @@ OpenHAB will not mess with the user defined Things by creating a MQTT Broker Thi
 Instead system broker connections are listed in the Paper UI Inbox like with auto-discovered
 brokers.
 
-### Auto discovery
+### Auto-Discovery
 
 The MQTT standard does not enforce any topic layout or topic value format. 
 A smart light vendor can decide to publish his lights under a "vendorname/deviceID/light" MQTT topic
@@ -185,13 +185,13 @@ Each channel supports a transformation pattern to extract a state from a structu
 An example would be the pattern `JSONPATH:$.device.status.temperature` for an
 incoming MQTT message of `{device: {status: { temperature: 23.2 }}}`.
 
-### MQTT for your own binding/extension
+### MQTT for Your Own Binding/Extension
 
 Many companies, including Amazon, Google and Microsoft with their respective voice assistants are providing a MQTT based service interaction.
 
 You are encouraged to a have a look at the `MQTTBrokerConnection` class and companion APIs in the `org.eclipse.smarthome.io.transport.mqtt` bundle to implement your next MQTT based binding.
 
-### Configuration via text files instead of Paper UI
+### Configuration via Text Files instead of Paper UI
 
 Some people insist on their text configuration files.
 And the extensions discussed here are not taking this away.
@@ -211,27 +211,27 @@ content
 ## Conclusion
 
 This is a contribution by an external author, by me David Gräff,
-and I feel the need to talk a few seconds about my motivation and the helpful OpenHAB community here.
+and I feel the need to talk a few seconds about my motivation and the helpful openHAB community here.
 
 I think that a home-automation framework should be easy to configure. With easy I mean,
 a graphical interface to enable/disable plugins, to setup plugins in a graphical fashion
 and to control provided functionality right after everything was configured.
 
-That is why I got caught by the OpenHAB 2.0 development where Paper UI got introduced.
+That is why I got caught by the openHAB 2.0 development where Paper UI got introduced.
 The [community](https://community.openhab.org/) was amazing, super friendly and welcoming
-when I started to use OpenHAB and asked my first questions on the forum.
+when I started to use openHAB and asked my first questions on the forum.
 So many people are interested in
 improving this open software by writing extremly detailed tutorials,
 report defects and spending time on finding a problems root cause or even
 despite lacking deeper programming knowledge enhance the software with code contributions.
 
-The many issues appearing weekly, over and over again, with the OpenHAB 1.x MQTT
-support got me thinking and I thought, that can be done better.
+The many issues appearing weekly, over and over again, with the openHAB 1.x MQTT
+support got me thinking and I thought, that it can be done better.
 It was just time that MQTT support arrives in the modern-days as well.
 
 I am really happy how this support turns out and
 I hope you will find all those features as useful as I do and
-that MQTT feels like a first class citizen in OpenHAB now.
+that MQTT feels like a first class citizen in openHAB now.
 
 If you have any comments on how we as a community can improve the support or covering even more use-cases,
 head over to the [discussion forum](https://community.openhab.org/).
