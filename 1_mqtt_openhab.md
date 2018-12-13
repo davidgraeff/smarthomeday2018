@@ -83,12 +83,12 @@ and (4) clicking on the found item in your openHAB Paper UI inbox. Right?
 
 Actually, it is even simpler. openHAB comes with an embedded MQTT broker now:
 
-![Install embedded MQTT Broker](6c00d2ad5e4bc553f5f209118307d8fd/raw/esh_embedded_install.png "Install embedded MQTT Broker")
+![Install embedded MQTT Broker](esh_embedded_install.png "Install embedded MQTT Broker")
 
 All you have to do is click on the enable checkbox within Paper UI to have a working
 MQTT broker, ready to use.
 
-![Configure embedded MQTT Broker](6c00d2ad5e4bc553f5f209118307d8fd/raw/esh_embedded_configure.png "Configure embedded MQTT Broker")
+![Configure embedded MQTT Broker](esh_embedded_configure.png "Configure embedded MQTT Broker")
 
 #### Broker connection status
 
@@ -130,9 +130,9 @@ secure=true
 Those pre-defined connections are called system broker connections internally.
 This is the equivalence of using Paper UI for configuring the service:
 
-![Manage system broker connections](6c00d2ad5e4bc553f5f209118307d8fd/raw/esh_system_connection_manage.png "Manage system broker connections")
+![Manage system broker connections](esh_system_connection_manage.png "Manage system broker connections")
 
-![Add system broker connection](6c00d2ad5e4bc553f5f209118307d8fd/raw/esh_system_connection_add.png "Add system broker connection")
+![Add system broker connection](esh_system_connection_add.png "Add system broker connection")
 
 OpenHAB will not mess with the user defined Things by creating a MQTT Broker Thing on its own.
 Instead system broker connections are listed in the Paper UI Inbox like with auto-discovered
