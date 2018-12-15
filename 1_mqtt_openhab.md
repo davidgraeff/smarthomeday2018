@@ -212,28 +212,28 @@ content
 
 ## Conclusion
 
-This is a contribution by an external author, by me David Gräff,
-and I feel the need to talk a few seconds about my motivation and the helpful openHAB community here.
+The new MQTT bindings allow an easy point and click configuration to include your
+MQTT capable device into openHAB. If your device follows any supported MQTT convention,
+it got even simpler with full auto-discovery of all device capabilities. At the same
+time all advanced requirements that the community brought up during development,
+could be considered.
 
-I think that a home-automation framework should be easy to configure. With easy I mean,
-a graphical interface to enable/disable plugins, to setup plugins in a graphical fashion
-and to control provided functionality right after everything was configured.
+This is a contribution by an external author, and I feel the need to talk a few seconds about my motivation.
 
-That is why I got caught by the openHAB 2.0 development where Paper UI got introduced.
+I think, that a home-automation framework should be simple to configure.
+I'm talking about a graphical interface to install, enable and disable plugins,
+to setup plugins in a graphical fashion and to control provided functionality
+right after everything was configured.
+
+That is why I got caught by the openHAB 2 development, where Paper UI got introduced.
 The [community](https://community.openhab.org/) was amazing, super friendly and welcoming
-when I started to use openHAB and asked my first questions on the forum.
-So many people are interested in
-improving this open software by writing extremly detailed tutorials,
-report defects and spending time on finding a problems root cause or even
-despite lacking deeper programming knowledge enhance the software with code contributions.
+when I asked my first questions on the forum.
 
-The many issues appearing weekly, over and over again, with the openHAB 1.x MQTT
-support got me thinking and I thought, that it can be done better.
-It was just time that MQTT support arrives in the modern-days as well.
+The many issues appearing weekly, over and over, with the openHAB 1.x MQTT binding
+got me thinking. It was just time that MQTT support arrives in a openHAB 2 compatible fashion.
 
-I am really happy how this support turns out and
-I hope you will find all those features as useful as I do and
-that MQTT feels like a first class citizen in openHAB now.
+I am really happy how this support turned out and I hope you will find it as useful as I do and
+that MQTT feels like a first class citizen now.
 
 If you have any comments on how we as a community can improve the support or covering even more use-cases,
 head over to the [discussion forum](https://community.openhab.org/).
