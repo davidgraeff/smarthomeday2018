@@ -4,18 +4,11 @@ If you haven't heared about MQTT yet, it is probably time to have a [look](https
 
 > "MQTT (Message Queuing Telemetry Transport) is an ISO standard (ISO/IEC PRF 20922)[2] publish-subscribe-based messaging protocol. It works on top of the TCP/IP protocol. It is designed for connections with remote locations where a "small code footprint" is required or the network bandwidth is limited."
 
-The Publish/Subscribe pattern is event-driven and enables messages to be pushed to clients.
-The central communication point is the MQTT broker, it is in charge of dispatching all messages between the senders and the rightful receivers.
-A client that publishes a message to the broker, includes a topic into the message.
-The topic is used as the routing information for the broker.
-Each client that wants to receive messages subscribes to one or more topics and the broker delivers all messages with the matching topic to the client.
+[TODO: Add MQTT image with broker in the middle and clients around]
 
-A topic is a simple string that can have more hierarchy levels, which are separated by a slash.
-A sample topic for sending temperature data of the living room could be **house/living-room/temperature**.
-
-In recent years MQTT got a lot of attention for IoT and home automation purposes.
-Propably mainly because of the simplicity of the protocol and its many client and server implementations, desktop and embedded, for several programming languages.
-A more recent features is MQTT via Websockets. That way MQTT is now even accessible for web applications.
+In recent years MQTT got a lot of attention for the Internet of Things,
+Maker and DIY culture as well as home automation purposes.
+Mainly because of its simplicity and its many client and server implementations.
 
 ## MQTT in openHAB 1.x and up to 2.3
 
@@ -27,22 +20,34 @@ In a next step some lines amongst the following would have been added to your .i
 
 ```
 Number temperature "temp [%.1f]" {mqtt="<[publicweatherservice:london-city/temperature:state:default]"}
+
 Switch mySwitch {mqtt="<[mybroker:myHome/office/light:state:default],>[mybroker:myhouse/office/light/set:command:ON:1],>[mybroker:myhouse/office/light/set:command:OFF:0]"}
 ```
 
 What you see above is two defined items, bound each to a MQTT topic as the source for the item state.
-Additional command topics are defined for the switch item to actually do anything when switched.
-Putting it to `ON` will cause the string "1" to be send to the MQTT topic `myhouse/office/light/set`,
-"0" is send for `OFF` respectively.
+Additional command topics are defined for the switch item, used when the switch is turned.
+Turning the switch on will cause the string "1" to be send to the MQTT topic `myhouse/office/light/set`,
+"0" is send for turining it off respectively.
 
 MQTT doesn't restrict you on what to publish as topic values and it is not part of the standard how to express a boolean or enumeration value.
-Some vendors use xml, some json structured data and some just send plain strings like "1" or "ON".
+Some vendors use xml, some use json structured data and some just send plain strings like "1" or "ON".
 
-The MQTT binding considered that from the beginning and offered to apply a transformation for received (and send) messages.
-That way the value of interest could be extracted via XPATH, JSONPath, a regex expression and all the other available transformations.
-Have a look at this `Number` item for example, where a XSLT file is used for transformation:
+The MQTT binding considered that from the beginning and offered to apply a transformation for received (and published) messages.
 
-`Number waterConsumption "consum [%d]" {mqtt="<[mybroker:myHome/watermeter:state:XSLT(parse_water_message.xslt)]"} `
+If your water meter for example sends JSon encoded data:
+
+```json
+{
+   device: {
+      meters: [
+         { value: 2 }
+      ]
+   }
+}
+```
+Have a look at this corresponding `Number` item, where a JSONPATH is used to extract the value of interest:
+
+`Number waterConsumption "consum [%d]" {mqtt="<[mybroker:myHome/watermeter:state:$.device.meters[0].value]"}`
 
 Unfortunately the MQTT support did not evolve much while openHAB migrated to a new architecture for 2.x.
 
@@ -54,28 +59,22 @@ Up until now, where some fundamental changes found their way into the codebase.
 
 ## MQTT in openHAB 2.4
 
-The new MQTT architecture has been realized by 3 independant extensions plus a MQTT core module.
-It took about one year to finish, from the first line of code to a fully test covered
-solution that lives up to the high coding standards of the underlying Eclipse Smarthome platform.
+The new MQTT architecture has been realized in an easy extensible modular way 
+by 3 independant extensions.
+They are fully test covered, living up to the high coding standards of the underlying Eclipse Smarthome platform.
 
 I will now take you on a journey of exploring all the new features, arriving soon on your openHAB installation.
 
 ### MQTT Broker
 
 When it comes to MQTT enabled devices, like your WiFi wall plug or custom Arduino or ESP8266 solution,
-you sooner or later realize that MQTT requires an additional server, the MQTT broker.
+you first need to take care of a very central aspect, the MQTT broker.
 
 Configuring the MQTT broker connection is so essential for a good MQTT support,
 that you can now finally do this in a graphical fashion:
 
-[picture of paperui: manually define a MQTT broker connection]
-[picture of paperui: inbox, showing a found MQTT broker]
-
-The nifty reader might have noticed. Yes, this addon supports MQTT broker
-auto discovery. The MQTT specification unfortunately does not require brokers
-to announce themselves in a standard way, so this feature is heuristic based.
-But you can be sure, if there is a standard port configured Mosquitto or any
-other broker in your local network, we'll find it.
+[TODO picture of paperui: manually define a MQTT broker connection]
+[TODO picture of paperui: inbox, showing a found MQTT broker]
 
 So to wrap it up: MQTT can be enabled for your network by
 (1) installing, (2) configuring and (3) setting up a broker server next to your openHAB software
@@ -85,8 +84,12 @@ Actually, it is even simpler. openHAB comes with an embedded MQTT broker now:
 
 ![Install embedded MQTT Broker](esh_embedded_install.png "Install embedded MQTT Broker")
 
-All you have to do is click on the enable checkbox within Paper UI to have a working
+All you have to do is installing the addon in Paper UI to have a working
 MQTT broker, ready to use.
+
+[TODO picture of paperui: install mqtt embedded broker]
+
+You can configure the broker in the service section of PaperUI (or via text files as usual):
 
 ![Configure embedded MQTT Broker](esh_embedded_configure.png "Configure embedded MQTT Broker")
 
@@ -114,7 +117,7 @@ of pre-installed extensions and other 3rd-party software like a MQTT broker.
 Like in the versions before, if you pre-install a MQTT broker like Mosquitto, you can tell openHAB about it
 via a service configuration file. 
 
-Instead of populating a "mqtt.conf" file, you are now creating a "etc/*.cfg"
+Instead of populating a "mqtt.conf" file, you are now creating a "etc/whatever-name.cfg"
 file that contains the following lines:
 
 ```
@@ -122,7 +125,7 @@ service.pid="org.eclipse.smarthome.mqttbroker"
 name="A mosquitto local installation"
 username="username"
 password="password"
-clientID="localESH"
+clientID="localClient123"
 host="127.0.0.1"
 secure=true
 ```
@@ -135,8 +138,7 @@ This is the equivalence of using Paper UI for configuring the service:
 ![Add system broker connection](esh_system_connection_add.png "Add system broker connection")
 
 OpenHAB will not mess with the user defined Things by creating a MQTT Broker Thing on its own.
-Instead system broker connections are listed in the Paper UI Inbox like with auto-discovered
-brokers.
+Instead system broker connections are listed in the Paper UI Inbox.
 
 ### Auto-Discovery
 
