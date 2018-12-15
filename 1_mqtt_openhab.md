@@ -78,7 +78,7 @@ that you can now finally do this in a graphical fashion:
 
 So to wrap it up: MQTT can be enabled for your network by
 (1) installing, (2) configuring and (3) setting up a broker server next to your openHAB software
-and (4) clicking on the found item in your openHAB Paper UI inbox. Right?
+and (4) adding the Broker Thing in Paper UI. Right?
 
 Actually, it is even simpler. openHAB comes with an embedded MQTT broker now:
 
@@ -86,8 +86,6 @@ Actually, it is even simpler. openHAB comes with an embedded MQTT broker now:
 
 All you have to do is installing the addon in Paper UI to have a working
 MQTT broker, ready to use.
-
-[TODO picture of paperui: install mqtt embedded broker]
 
 You can configure the broker in the service section of PaperUI (or via text files as usual):
 
@@ -101,7 +99,7 @@ May it be wrong credentials, a denied tcp connection (i.e. firewall) or a maximu
 The former MQTT implementation knew about the reason as well. But instead of only
 logging it, the reason is now directly presented to you via the Thing status:
 
-[picture of paperui broker connection thing offline status]
+[TODO picture of paperui broker connection thing offline status]
 
 This also means, the status is available for the automation rule engine to e.g.
 react on a failing broker connection.
@@ -109,13 +107,13 @@ react on a failing broker connection.
 #### System Broker Connections for openHAB Distributions
 
 This section is targeting distributors.
-You may skip to the next exiting feature of MQTT Thing autodiscovery if you are not interested in bundling openHAB.
+You may skip to the next exiting feature of MQTT Thing auto-discovery if you are not interested in bundling openHAB.
 
 It is crucial to be able to pre-configure openHAB to offer a seamless integration
-of pre-installed extensions and other 3rd-party software like a MQTT broker.
+of pre-installed extensions and other 3rd-party software like an MQTT broker.
 
-Like in the versions before, if you pre-install a MQTT broker like Mosquitto, you can tell openHAB about it
-via a service configuration file. 
+Like in the versions before, if you pre-install a MQTT broker like Mosquitto,
+you can tell openHAB about it via a service configuration file. 
 
 Instead of populating a "mqtt.conf" file, you are now creating a "etc/whatever-name.cfg"
 file that contains the following lines:
@@ -130,15 +128,14 @@ host="127.0.0.1"
 secure=true
 ```
 
-Those pre-defined connections are called system broker connections internally.
+Those pre-defined connections are called system broker connections.
 This is the equivalence of using Paper UI for configuring the service:
 
 ![Manage system broker connections](esh_system_connection_manage.png "Manage system broker connections")
 
 ![Add system broker connection](esh_system_connection_add.png "Add system broker connection")
 
-OpenHAB will not mess with the user defined Things by creating a MQTT Broker Thing on its own.
-Instead system broker connections are listed in the Paper UI Inbox.
+Be aware that this adds the broker to the users Inbox, but does not create a Broker Thing on its own.
 
 ### Auto-Discovery
 
@@ -169,7 +166,7 @@ That might not be possible in some cases though.
 
 It is always possible to create a manual MQTT Thing by selecting the MQTT broker Bridge Thing and a Thing name:
 
-[picture of paperui manual MQTT Thing creation]
+[TODO picture of paperui manual MQTT Thing creation]
 
 By adding Channels to your Thing, you actually bind MQTT topics to your OpenHAB world.
 The following channel types are supported:
@@ -180,8 +177,11 @@ The following channel types are supported:
 * Contact: This channel represents an open/close (on/off) state of a given topic.
 * Switch: This channel represents an on/off state of a given topic and can send an on/off value to a given topic. This channel takes a configuration for the ON and OFF state, because some people use "1" and "0", some "true" and "false" and so on.
 * Color: This channel handles color values in RGB and HSB format.
+* DateTime: This channel handles date/time values.
+* Image: Show images like bmp, jpeg, png and other supported image formats by publishing them as binary stream over MQTT.
+* Location: This channel handles location values like GPS coordinates.
 
-[picture of paperui example Switch channel config page]
+[TODO: picture of paperui example Switch channel config page]
 
 Each channel supports a transformation pattern to extract a state from a structured response like JSON.
 An example would be the pattern `JSONPATH:$.device.status.temperature` for an
@@ -195,10 +195,8 @@ You are encouraged to a have a look at the `MQTTBrokerConnection` class and comp
 
 ### Configuration via Text Files instead of Paper UI
 
-Some people insist on their text configuration files.
-And the extensions discussed here are not taking this away.
-Because of the way how OpenHAB works, all features shown,
-can also be setup with text configuration like in the following example:
+The extensions discussed here are not taking away the possebilities to configure via text files,
+like in the following example:
 
 *demo.thing* file:
 ```
