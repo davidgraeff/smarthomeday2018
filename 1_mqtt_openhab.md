@@ -274,7 +274,7 @@ you are now creating an "etc/whatever-name.cfg" file that contains the following
 
 ```
 service.pid="org.eclipse.smarthome.mqttbroker"
-name="A mosquitto local installation"
+name="mosquitto"
 username="username"
 password="password"
 clientID="localClient123"
@@ -287,7 +287,7 @@ Be aware that this adds the broker to the Inbox, but does not create a Broker Th
 
 ## Conclusion
 
-The new MQTT bindings allow an easy point and click configuration to include your
+The discussed MQTT bindings allow an easy point and click configuration to incorporate your
 MQTT capable devices into openHAB. If your device follows any supported MQTT convention,
 it got even simpler with full auto-discovery of all device capabilities. At the same
 time all advanced requirements that the community brought up during development,
