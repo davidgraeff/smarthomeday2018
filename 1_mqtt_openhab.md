@@ -20,7 +20,7 @@ Let us wrap up a bit of history to understand what has changed.
 openHAB had quite powerful MQTT support for its time in the 1.x days.
 
 First you would have defined one or multiple MQTT brokers in a service configuration file.
-In a next step some lines like the following would have been added to your .item file:
+In a next step some lines like the following would have been added to your *.item* file:
 
 ```
 Switch mySwitch {mqtt="<[mybroker:home/office/lamp:state:default],>[mybroker:home/office/lamp/set:command:*]"}
@@ -37,7 +37,7 @@ What happens on the MQTT level for the command topic is:
 ![MQTT Command Topic Publish](esh_mqtt-mqttpublishsubscribe2.png "MQTT Command Topic Publish")
 
 MQTT doesn't restrict you on what to publish as topic values and it is not part of the standard how to express a boolean or enumeration value.
-Some vendors use xml, some use json structured data and some just send plain strings like "1" or "ON".
+Some vendors use xml, some use json structured data and some just send plain strings like *1* or *ON*.
 
 The MQTT binding considered that from the beginning and offered to apply a transformation for received (and published) messages.
 
@@ -66,8 +66,8 @@ Up until now, where some fundamental changes found their way into the codebase.
 
 ## MQTT in openHAB 2.4
 
-The new MQTT architecture has been realized in an easy extensible modular way by 3 independant extensions.
-They are fully test covered to live up to the high coding standards of the underlying Eclipse Smarthome platform.
+The new MQTT architecture has been realized in an easy extensible, modular way.
+They different bundles are fully test covered to live up to the high coding standards of the underlying Eclipse Smarthome platform.
 
 I will now take you on a journey of exploring all the new features, arriving soon on your openHAB installation.
 
@@ -107,11 +107,12 @@ Actually, it is even simpler. openHAB comes with an embedded MQTT broker now:
 
 All you have to do is, installing the addon in Paper UI to have a working MQTT broker, ready to use.
 
-You can configure the broker in the service section of PaperUI (or via text files as usual):
+You can optionally configure the embedded broker in the service section of PaperUI (or via text files as usual):
 
 ![Configure embedded MQTT Broker](esh_embedded_configure.png "Configure embedded MQTT Broker")
 
-The new broker appears in your Inbox as a Broker connection. Just add it, no configuration necessary.
+A new *Broker Connection* appears in your Inbox.
+Just add it, no further configuration necessary.
 
 #### Broker Connection Status
 
@@ -133,7 +134,7 @@ The MQTT standard does not enforce any topic layout or topic value format.
 A smart light vendor can decide to publish his lights under a "vendorname/deviceID/light" MQTT topic
 or use a totally different layout like "light/vendorname/deviceid".
 
-People even disagree about the value format, sometimes it is "ON", sometimes "1" or "true".
+People even disagree about the value format, sometimes it is *ON*, sometimes *1* or *true*.
 
 That is why MQTT topic and format conventions got established amongst the DIY IoT community. 
 The new MQTT Things extension supports two conventions out-of-the-box:
