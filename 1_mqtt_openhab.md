@@ -2,9 +2,9 @@
 
 If you haven't heared about MQTT yet, it is probably time to have a [look](https://en.wikipedia.org/wiki/MQTT). Quoting Wikipedia here:
 
-> "MQTT (Message Queuing Telemetry Transport) is an ISO standard (ISO/IEC PRF 20922)[2] publish-subscribe-based messaging protocol. It works on top of the TCP/IP protocol. It is designed for connections with remote locations where a "small code footprint" is required or the network bandwidth is limited."
+> "MQTT (Message Queuing Telemetry Transport) is an ISO standard (ISO/IEC PRF 20922)[2] publish-subscribe-based messaging protocol. [&hellip;] It is designed for connections with remote locations where a "small code footprint" is required or the network bandwidth is limited."
 
-[TODO: Add MQTT image with broker in the middle and clients around]
+![MQTT Overview](esh_mqtt-MQTT-Overview.png "MQTT Overview with Broker and clients")
 
 In recent years MQTT got a lot of attention for the Internet of Things,
 Maker and DIY culture as well as home automation purposes.
