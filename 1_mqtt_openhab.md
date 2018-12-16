@@ -196,6 +196,28 @@ Each channel supports a transformation pattern to extract a state from a structu
 An example would be the pattern `JSONPATH:$.device.status.temperature` for an
 incoming MQTT message of `{device: {status: { temperature: 23.2 }}}`.
 
+### MQTT Actions
+
+There is an openHAB 1.x addon, called "MQTT Action". It allows to send arbitrary payloads
+to arbitrary topics from rule and script files.
+
+There is an equivalent functionality also available for the new MQTT binding. It is build up
+on the new automation engine and works from textual DSL rule files as well as from new
+script (JavaScript/Jython) and new automation rules. An example is given below:
+
+```
+rule "On system start"
+when
+  System started
+then
+  val actions = getActions("mqtt","mqtt:systemBroker:embedded-mqtt-broker")
+  actions.publishMQTT("test/system/started","true")    
+end
+```
+
+Unfortunately Paper UI is not yet capable of graphically create useful rules with this action.
+This is a limitation of Paper UI and will be resolved in future releases.
+
 ### Configuration via Text Files
 
 You find all examples in this blog post performed via Paper UI.
@@ -237,15 +259,15 @@ In the given example an unsecure broker connection is defined with a *Generic MQ
 
 #### System Broker Connections
 
-For openHAB distributors it is crucial to be able to pre-configure openHAB
+For openHAB distributors it is crucial to pre-configure openHAB
 to offer a seamless integration of pre-installed extensions and
-other 3rd-party software like an MQTT broker.
+3rd-party software like an MQTT broker.
 
-Like in the versions before, if you pre-install an MQTT broker like Mosquitto,
-you can tell openHAB about it via a service configuration file.
+As in the version before, you can tell openHAB about MQTT brokers
+via the mqtt service configuration file.
 
-Instead of populating an "mqtt.conf" file, you are now creating an "etc/whatever-name.cfg"
-file that contains the following lines:
+Instead of populating an "mqtt.conf" file though,
+you are now creating an "etc/whatever-name.cfg" file that contains the following lines:
 
 ```
 service.pid="org.eclipse.smarthome.mqttbroker"
@@ -254,23 +276,16 @@ username="username"
 password="password"
 clientID="localClient123"
 host="127.0.0.1"
-secure=true
+secure=false
 ```
 
 Those pre-defined connections are called system broker connections.
-
-By the way, this is the equivalence of using Paper UI for configuring the MQTT managed connections service:
-
-![Manage system broker connections](esh_system_connection_manage.png "Manage system broker connections")
-
-![Add system broker connection](esh_system_connection_add.png "Add system broker connection")
-
 Be aware that this adds the broker to the Inbox, but does not create a Broker Thing on its own.
 
 ## Conclusion
 
 The new MQTT bindings allow an easy point and click configuration to include your
-MQTT capable device into openHAB. If your device follows any supported MQTT convention,
+MQTT capable devices into openHAB. If your device follows any supported MQTT convention,
 it got even simpler with full auto-discovery of all device capabilities. At the same
 time all advanced requirements that the community brought up during development,
 could be considered.
