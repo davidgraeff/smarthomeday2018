@@ -145,7 +145,7 @@ The new MQTT Things extension supports two conventions out-of-the-box:
 Because the topic structure of a convention is known,
 the MQTT Things extension is able to provide auto-discovery and mapping of MQTT topics to openHAB Things and Channels.
 
-![Configure embedded MQTT Broker](esh_embedded_configure.png "Configure embedded MQTT Broker")
+![Homie discovered Topics](mqtt-homie-temperature.png "Homie discovered Topics")
 
 If you setup your next DIY Home-Automation gadget, consider flashing it with a *Homie 3.x* compatible firmware and it will work with openHAB right away.
 
@@ -162,7 +162,7 @@ It is always possible to create a manual MQTT Thing:
 
 By adding Channels to your Thing, you actually bind MQTT topics to your OpenHAB world.
 
-![Generic MQTT Thing with channels](generic_mqtt_thing_with_channels "Generic MQTT Thing with channels")
+![Generic MQTT Thing with channels](generic_mqtt_thing_with_channels.png "Generic MQTT Thing with channels")
 
 The following channel types are supported:
 
