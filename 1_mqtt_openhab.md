@@ -134,44 +134,48 @@ A smart light vendor can decide to publish his lights under a "vendorname/device
 or use a totally different layout like "light/vendorname/deviceid".
 
 People even disagree about the value format, sometimes it is "ON", sometimes "1" or "true".
-Did you know that for Filipinos a switched-on light is "OPEN"?
-And it doesn't even need to be English.
 
-And that is why MQTT topic and format conventions got established amongst the IoT community. 
+That is why MQTT topic and format conventions got established amongst the DIY IoT community. 
 The new MQTT Things extension supports two conventions out-of-the-box:
 
-* The Homie 3.x specification: This MQTT convention defines the layout of MQTT topics and the value format is discribed via "attribute topics".
-* The HomeAssistant MQTT Components specification: The related documents describe common components like a Light, a Switch, a Fan, an Air-Conditioner and so on.
+* The Homie 3.x specification: This vender neutral MQTT convention defines the layout of MQTT topics and the value format. It allows a full device capabilities discovery. 
+* The HomeAssistant MQTT Components specification: Some common components like a Light, a Switch, a Fan, an Air-Conditioner and so on are defined. More generic device capabilities cannot be expressed via this convention.
 
-Because the topic structure is known, the MQTT Things extension is able to provide auto-discovery and mapping of MQTT topics to OpenHAB Things and Channels.
+Because the topic structure of a convention is known,
+the MQTT Things extension is able to provide auto-discovery and mapping of MQTT topics to openHAB Things and Channels.
 
-[picture of paperui inbox]
+![Configure embedded MQTT Broker](esh_embedded_configure.png "Configure embedded MQTT Broker")
 
-If you setup your next Home-Automation gadget, consider flashing it with a *Homie 3.x* compatible firmware and it will work with OpenHAB right away.
+If you setup your next DIY Home-Automation gadget, consider flashing it with a *Homie 3.x* compatible firmware and it will work with openHAB right away.
 
 ### MQTT Things
 
 It cannot be stressed enough, to consider changing existing MQTT client devices to a MQTT convention like the mentioned *Homie 3.x* convention.
 That might not be possible in some cases though. 
 
-It is always possible to create a manual MQTT Thing by selecting the MQTT broker Bridge Thing and a Thing name:
+It is always possible to create a manual MQTT Thing:
 
-[TODO picture of paperui manual MQTT Thing creation]
+![Add Generic MQTT Thing](generic_mqtt_thing_create_1.png "Add Generic MQTT Thing")
+
+![Generic MQTT Thing](generic_mqtt_thing_create_2.png "Generic MQTT Thing")
 
 By adding Channels to your Thing, you actually bind MQTT topics to your OpenHAB world.
+
+![Generic MQTT Thing with channels](generic_mqtt_thing_with_channels "Generic MQTT Thing with channels")
+
 The following channel types are supported:
 
-* String: This channel can show the received text on the given topic and can send text to a given topic.
-* Number: This channel can show the received number on the given topic and can send a number to a given topic. It can have min, max and step values.
-* Dimmer: This channel handles numeric values as percentages. It can have min, max and step values.
-* Contact: This channel represents an open/close (on/off) state of a given topic.
-* Switch: This channel represents an on/off state of a given topic and can send an on/off value to a given topic. This channel takes a configuration for the ON and OFF state, because some people use "1" and "0", some "true" and "false" and so on.
-* Color: This channel handles color values in RGB and HSB format.
-* DateTime: This channel handles date/time values.
-* Image: Show images like bmp, jpeg, png and other supported image formats by publishing them as binary stream over MQTT.
-* Location: This channel handles location values like GPS coordinates.
-
-[TODO: picture of paperui example Switch channel config page]
+| Type          | Parameters     | Description                                                                                |
+|---------------|----------------|--------------------------------------------------------------------------------------------|
+| String        |                | Shows the received text on the given topic and send text to a given topic.                 |
+| Number        | min, max       | Shows the received number on the given topic and send a number to a given topic.           |
+| Dimmer        | min, max, step | Handles numeric values as percentages.                                                     |
+| Contact       |                | This channel represents a open/close state of a given topic.                               |
+| Switch        | custom on/off  | Represents an on/off state of a given topic and can send an on/off value to a given topic. |
+| Color RGB/HSB | custom on/off  | Handles color values in RGB / HSB format.                                                  |
+| DateTime      |                | This channel handles date/time values.                                                     |
+| Image         |                | This channel handles binary images in common java supported formats (bmp,jpg,png).         |
+| Location      |                | This channel handles a location.                                                           |
 
 Each channel supports a transformation pattern to extract a state from a structured response like JSON.
 An example would be the pattern `JSONPATH:$.device.status.temperature` for an
