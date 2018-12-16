@@ -2,7 +2,11 @@
 
 If you haven't heared about MQTT yet, it is probably time to have a [look](https://en.wikipedia.org/wiki/MQTT). Quoting Wikipedia here:
 
-> "MQTT (Message Queuing Telemetry Transport) is an ISO standard (ISO/IEC PRF 20922)[2] publish-subscribe-based messaging protocol. [&hellip;] It is designed for connections with remote locations where a "small code footprint" is required or the network bandwidth is limited."
+> "MQTT (Message Queuing Telemetry Transport) is an ISO standard (ISO/IEC PRF 20922)[2] publish-subscribe-based messaging protocol. [&hellip;] It is designed for connections with remote locations where a "small code footprint" is required or the network bandwidth is limited.  [&hellip;]
+> 
+> An MQTT system consists of clients communicating with a server, often called a "broker". A client may be either a publisher of information or a subscriber. Each client can connect to the broker.
+> 
+> Information is organized in a hierarchy of topics."
 
 ![MQTT Overview](esh_mqtt-MQTT-Overview.png "MQTT Overview with Broker and clients")
 
@@ -16,18 +20,21 @@ Let us wrap up a bit of history to understand what has changed.
 openHAB had quite powerful MQTT support for its time in the 1.x days.
 
 First you would have defined one or multiple MQTT brokers in a service configuration file.
-In a next step some lines amongst the following would have been added to your .item file:
+In a next step some lines like the following would have been added to your .item file:
 
 ```
-Number temperature "temp [%.1f]" {mqtt="<[publicweatherservice:london-city/temperature:state:default]"}
-
-Switch mySwitch {mqtt="<[mybroker:myHome/office/light:state:default],>[mybroker:myhouse/office/light/set:command:ON:1],>[mybroker:myhouse/office/light/set:command:OFF:0]"}
+Switch mySwitch {mqtt="<[mybroker:home/office/lamp:state:default],>[mybroker:home/office/lamp/set:command:*]"}
 ```
 
-What you see above is two defined items, bound each to a MQTT topic as the source for the item state.
-Additional command topics are defined for the switch item, used when the switch is turned.
-Turning the switch on will cause the string "1" to be send to the MQTT topic `myhouse/office/light/set`,
-"0" is send for turining it off respectively.
+What you see above is an item, bound to a MQTT topic as the source for the item state.
+
+A command topic is defined for the switch item, used when the switch is turned.
+What happens on the MQTT level for the command topic is:
+
+1. The target device **subscribes** to the command topic `home/office/lamp/set`:
+![MQTT Command Topic Subscribe](esh_mqtt-mqttpublishsubscribe1.png "MQTT Command Topic Subscribe")
+2. OpenHAB **publishes** via the MQTT connection to the command topic `home/office/lamp/set`:
+![MQTT Command Topic Publish](esh_mqtt-mqttpublishsubscribe2.png "MQTT Command Topic Publish")
 
 MQTT doesn't restrict you on what to publish as topic values and it is not part of the standard how to express a boolean or enumeration value.
 Some vendors use xml, some use json structured data and some just send plain strings like "1" or "ON".
@@ -59,9 +66,8 @@ Up until now, where some fundamental changes found their way into the codebase.
 
 ## MQTT in openHAB 2.4
 
-The new MQTT architecture has been realized in an easy extensible modular way 
-by 3 independant extensions.
-They are fully test covered, living up to the high coding standards of the underlying Eclipse Smarthome platform.
+The new MQTT architecture has been realized in an easy extensible modular way by 3 independant extensions.
+They are fully test covered to live up to the high coding standards of the underlying Eclipse Smarthome platform.
 
 I will now take you on a journey of exploring all the new features, arriving soon on your openHAB installation.
 
