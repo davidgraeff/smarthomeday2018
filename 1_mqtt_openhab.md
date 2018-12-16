@@ -70,8 +70,7 @@ Up until now, where some fundamental changes found their way into the codebase.
 
 ## MQTT in openHAB 2.4
 
-The new MQTT architecture has been realized in an easy extensible, modular way.
-They different bundles are fully test covered to live up to the high coding standards of the underlying Eclipse Smarthome platform.
+The new MQTT architecture has been realized in an easy extensible, modular way. The different bundles are fully test covered to live up to the high coding standards of the underlying Eclipse Smarthome platform.
 
 I will now take you on a journey of exploring all the new features, arriving soon on your openHAB installation.
 
