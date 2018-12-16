@@ -101,7 +101,6 @@ or just the wrong IP and Port configuration parameters.
 
 The former MQTT implementation knew about the reason as well,
 but at that time could only log any problem.
-
 The reason is now directly presented to you via the Thing status.
 
 This also means, the status is available for the automation rule engine to e.g.
@@ -179,7 +178,7 @@ The following channel types are supported:
 |---------------|----------------|--------------------------------------------------------------------------------------------|
 | String        |                | Shows the received text on the given topic and send text to a given topic.                 |
 | Number        | min, max       | Shows the received number on the given topic and send a number to a given topic.           |
-| Dimmer        | min, max, step | Handles numeric values as percentages.                                                     |
+| Percentage    | min, max, step | Handles numeric values as percentages for Dimmer or Rollershutter items for example.       |
 | Contact       |                | This channel represents a open/close state of a given topic.                               |
 | Switch        | custom on/off  | Represents an on/off state of a given topic and can send an on/off value to a given topic. |
 | Color RGB/HSB | custom on/off  | Handles color values in RGB / HSB format.                                                  |
