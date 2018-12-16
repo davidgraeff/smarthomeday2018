@@ -34,9 +34,9 @@ A command topic is defined for the switch item, used when the switch is turned.
 What happens on the MQTT level for the command topic is:
 
 <ol>
-<li>The target device **subscribes** to the command topic `home/office/lamp/set`:
+   <li>The target device <b>subscribes</b> to the command topic <code>home/office/lamp/set</code>:
 <p align="center"> <img src="esh_mqtt-mqttpublishsubscribe1.png" alt="MQTT Command Topic Subscribe"> </p>
-<li>OpenHAB **publishes** via the MQTT connection to the command topic `home/office/lamp/set`:
+   <li>OpenHAB <b>publishes</b> via the MQTT connection to the command topic <code>home/office/lamp/set</code>:
 <p align="center"> <img src="esh_mqtt-mqttpublishsubscribe2.png" alt="MQTT Command Topic Publish"> </p>
 </ol>
 
