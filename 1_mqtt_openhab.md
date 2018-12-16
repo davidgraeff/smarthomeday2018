@@ -93,6 +93,22 @@ Configure your Broker connection:
 
 ![MQTT Binding install](mqtt-broker-create2.png "MQTT Binding install")
 
+#### Broker Connection Status
+
+A broker connection can fail for many reasons.
+May it be wrong credentials, a denied tcp connection (i.e. firewall), a maximum connection limit
+or just the wrong IP and Port configuration parameters.
+
+The former MQTT implementation knew about the reason as well,
+but at that time could only log any problem.
+
+The reason is now directly presented to you via the Thing status.
+
+This also means, the status is available for the automation rule engine to e.g.
+react on a failing broker connection.
+
+### Embedded MQTT Broker
+
 To wrap it up: MQTT can be enabled for your network by
 
 1. installing an MQTT broker,
@@ -113,20 +129,6 @@ You can optionally configure the embedded broker in the service section of Paper
 
 A new *Broker Connection* appears in your Inbox.
 Just add it, no further configuration necessary.
-
-#### Broker Connection Status
-
-A broker connection can fail for many reasons.
-May it be wrong credentials, a denied tcp connection (i.e. firewall), a maximum connection limit
-or just the wrong IP and Port configuration parameters.
-
-The former MQTT implementation knew about the reason as well,
-but at that time could only log any problem.
-
-The reason is now directly presented to you via the Thing status.
-
-This also means, the status is available for the automation rule engine to e.g.
-react on a failing broker connection.
 
 ### Auto-Discovery
 
