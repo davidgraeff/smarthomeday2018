@@ -156,15 +156,22 @@ If you setup your next DIY Home-Automation gadget, consider flashing it with a *
 It cannot be stressed enough, to consider changing existing MQTT client devices to a MQTT convention like the mentioned *Homie 3.x* convention.
 That might not be possible in some cases though. 
 
-It is always possible to create a manual MQTT Thing:
+Use one or multiple *Generic MQTT Things* to group an arbitrary number of channels each:
+
+![Generic MQTT Thing with channels](generic_mqtt_thing_with_channels.png "Generic MQTT Thing with channels")
+
+The process is quite easy and can be done on Paper UI, or via textual configuration.
+For the later see the section towards the end of this blog post.
 
 ![Add Generic MQTT Thing](generic_mqtt_thing_create_1.png "Add Generic MQTT Thing")
 
+The created Thing appears *Online* if the broker connection is *Online*:
+
 ![Generic MQTT Thing](generic_mqtt_thing_create_2.png "Generic MQTT Thing")
 
-By adding Channels to your Thing, you actually bind MQTT topics to your OpenHAB world.
+Add a channel with a matching type to your Thing:
 
-![Generic MQTT Thing with channels](generic_mqtt_thing_with_channels.png "Generic MQTT Thing with channels")
+![Add channel to Generic Thing](add_channel_1.png "Add channel to Generic Thing")
 
 The following channel types are supported:
 
@@ -180,13 +187,18 @@ The following channel types are supported:
 | Image         |                | This channel handles binary images in common java supported formats (bmp,jpg,png).         |
 | Location      |                | This channel handles a location.                                                           |
 
+Each *Channel* requires configuration and is bound to an MQTT topic for the channel state
+and another MQTT topic for the command:
+
+![Generic MQTT Thing channel configuration](mqtt-generic-channel-config.png "Generic MQTT Thing channel configuration")
+
 Each channel supports a transformation pattern to extract a state from a structured response like JSON.
 An example would be the pattern `JSONPATH:$.device.status.temperature` for an
 incoming MQTT message of `{device: {status: { temperature: 23.2 }}}`.
 
 ### Configuration via Text Files
 
-You find all examples in the blog post performed via Paper UI.
+You find all examples in this blog post performed via Paper UI.
 You can of course still setup every aspect via text files,
 like in the following examples.
 
