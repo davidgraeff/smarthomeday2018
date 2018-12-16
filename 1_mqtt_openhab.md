@@ -161,20 +161,20 @@ That might not be possible in some cases though.
 
 Use one or multiple *Generic MQTT Things* to group an arbitrary number of channels each:
 
-![Generic MQTT Thing with channels](generic_mqtt_thing_with_channels.png "Generic MQTT Thing with channels")
+<p align="center"> <img src="generic_mqtt_thing_with_channels.png" alt="Generic MQTT Thing with channels"> </p>
 
 The process is quite easy and can be done on Paper UI, or via textual configuration.
 For the later see the section towards the end of this blog post.
 
-![Add Generic MQTT Thing](generic_mqtt_thing_create_1.png "Add Generic MQTT Thing")
+<p align="center"> <img src="generic_mqtt_thing_create_1.png" alt="Add Generic MQTT Thing"> </p>
 
 The created Thing appears *Online* if the broker connection is *Online*:
 
-![Generic MQTT Thing](generic_mqtt_thing_create_2.png "Generic MQTT Thing")
+<p align="center"> <img src="generic_mqtt_thing_create_2.png" alt="Generic MQTT Thing"> </p>
 
 Add a channel with a matching type to your Thing:
 
-![Add channel to Generic Thing](add_channel_1.png "Add channel to Generic Thing")
+<p align="center"> <img src="add_channel_1.png" alt="Add channel to Generic Thing"> </p>
 
 The following channel types are supported:
 
@@ -193,7 +193,7 @@ The following channel types are supported:
 Each *Channel* requires configuration and is bound to an MQTT topic for the channel state
 and another MQTT topic for the command:
 
-![Generic MQTT Thing channel configuration](mqtt-generic-channel-config.png "Generic MQTT Thing channel configuration")
+<p align="center"> <img src="mqtt-generic-channel-config.png" alt="Generic MQTT Thing channel configuration"> </p>
 
 Each channel supports a transformation pattern to extract a state from a structured response like JSON.
 An example would be the pattern `JSONPATH:$.device.status.temperature` for an
@@ -249,11 +249,11 @@ Bridge mqtt:broker:myUnsecureBroker [ host="192.168.0.42", secure=false ]
 {
     Thing mqtt:topic:mything {
     Channels:
-        Type switch : lamp "Kitchen Lamp" [ mqttstate="lamp/enabled", mqttcommand="lamp/enabled/set" ]
-        Type switch : fancylamp "Fancy Lamp" [ mqttstate="fancy/lamp/state", mqttcommand="fancy/lamp/command", on="i-am-on", off="i-am-off" ]
-        Type string : alarmpanel "Alarm system" [ mqttstate="alarm/panel/state", mqttcommand="alarm/panel/set", allowedStates="ARMED_HOME,ARMED_AWAY,UNARMED" ]
-        Type color : lampcolor "Kitchen Lamp color" [ mqttstate="lamp/color", mqttcommand="lamp/color/set", rgb=true ]
-        Type dimmer : blind "Blind" [ mqttstate="blind/state", mqttcommand="blind/set", min=0, max=5, step=1 ]
+        Type switch : lamp "Kitchen Lamp" [ stateTopic="lamp/enabled", commandTopic="lamp/enabled/set" ]
+        Type switch : fancylamp "Fancy Lamp" [ stateTopic="fancy/lamp/state", commandTopic="fancy/lamp/command", on="i-am-on", off="i-am-off" ]
+        Type string : alarmpanel "Alarm system" [ stateTopic="alarm/panel/state", commandTopic="alarm/panel/set", allowedStates="ARMED_HOME,ARMED_AWAY,UNARMED" ]
+        Type color : lampcolor "Kitchen Lamp color" [ stateTopic="lamp/color", commandTopic="lamp/color/set", rgb=true ]
+        Type dimmer : blind "Blind" [ stateTopic="blind/state", commandTopic="blind/set", min=0, max=5, step=1 ]
     }
 }
 ```
