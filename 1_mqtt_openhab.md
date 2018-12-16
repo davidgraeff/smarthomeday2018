@@ -8,7 +8,9 @@ If you haven't heared about MQTT yet, it is probably time to have a [look](https
 > 
 > Information is organized in a hierarchy of topics."
 
-![MQTT Overview](esh_mqtt-MQTT-Overview.png "MQTT Overview with Broker and clients")
+<p align="center">
+<img src="esh_mqtt-MQTT-Overview.png" title="MQTT Overview with Broker and clients">
+</p>
 
 In recent years MQTT got a lot of attention for the Internet of Things,
 Maker and DIY culture as well as home automation purposes.
@@ -31,10 +33,12 @@ What you see above is an item, bound to a MQTT topic as the source for the item 
 A command topic is defined for the switch item, used when the switch is turned.
 What happens on the MQTT level for the command topic is:
 
-1. The target device **subscribes** to the command topic `home/office/lamp/set`:
-![MQTT Command Topic Subscribe](esh_mqtt-mqttpublishsubscribe1.png "MQTT Command Topic Subscribe")
-2. OpenHAB **publishes** via the MQTT connection to the command topic `home/office/lamp/set`:
-![MQTT Command Topic Publish](esh_mqtt-mqttpublishsubscribe2.png "MQTT Command Topic Publish")
+<ol>
+<li>The target device **subscribes** to the command topic `home/office/lamp/set`:
+<p align="center"> <img src="esh_mqtt-mqttpublishsubscribe1.png" alt="MQTT Command Topic Subscribe"> </p>
+<li>OpenHAB **publishes** via the MQTT connection to the command topic `home/office/lamp/set`:
+<p align="center"> <img src="esh_mqtt-mqttpublishsubscribe2.png" alt="MQTT Command Topic Publish"> </p>
+</ol>
 
 MQTT doesn't restrict you on what to publish as topic values and it is not part of the standard how to express a boolean or enumeration value.
 Some vendors use xml, some use json structured data and some just send plain strings like *1* or *ON*.
@@ -73,7 +77,7 @@ I will now take you on a journey of exploring all the new features, arriving soo
 
 First of all, you want to install the new MQTT binding, for example from within Paper UI in the *Addons* section:
 
-![MQTT Binding install](esh_things_install.png "MQTT Binding install")
+<p align="center"> <img src="esh_things_install.png" alt="MQTT Binding install"> </p>
 
 The new MQTT binding can coexist with the old MQTT openHAB 1.x binding (but I really do not recommend this setup).
 
@@ -87,11 +91,11 @@ that you can now finally do this in a graphical fashion.
 
 Select the correct Thing to create:
 
-![MQTT Binding install](mqtt-broker-create1.png "MQTT Binding install")
+<p align="center"> <img src="mqtt-broker-create1.png" alt="MQTT Create Thing"> </p>
 
 Configure your Broker connection:
 
-![MQTT Binding install](mqtt-broker-create2.png "MQTT Binding install")
+<p align="center"> <img src="mqtt-broker-create2.png" alt="Configure your Broker connection"> </p>
 
 #### Broker Connection Status
 
@@ -118,13 +122,13 @@ Right?
 
 Actually, it is even simpler. openHAB comes with an embedded MQTT broker now:
 
-![Install embedded MQTT Broker](esh_embedded_install.png "Install embedded MQTT Broker")
+<p align="center"> <img src="esh_embedded_install.png" alt="Install embedded MQTT Broker"> </p>
 
 All you have to do is, installing the addon in Paper UI to have a working MQTT broker, ready to use.
 
 You can optionally configure the embedded broker in the service section of PaperUI (or via text files as usual):
 
-![Configure embedded MQTT Broker](esh_embedded_configure.png "Configure embedded MQTT Broker")
+<p align="center"> <img src="esh_embedded_configure.png" alt="Configure embedded MQTT Broker"> </p>
 
 A new *Broker Connection* appears in your Inbox.
 Just add it, no further configuration necessary.
@@ -146,7 +150,7 @@ The new MQTT Things extension supports two conventions out-of-the-box:
 Because the topic structure of a convention is known,
 the MQTT Things extension is able to provide auto-discovery and mapping of MQTT topics to openHAB Things and Channels.
 
-![Homie discovered Topics](mqtt-homie-temperature.png "Homie discovered Topics")
+<p align="center"> <img src="mqtt-homie-temperature.png" alt="Homie discovered Topics"> </p>
 
 If you setup your next DIY Home-Automation gadget, consider flashing it with a *Homie 3.x* compatible firmware and it will work with openHAB right away.
 
