@@ -130,7 +130,7 @@ You can optionally configure the embedded broker in the service section of Paper
 A new *Broker Connection* appears in your Inbox.
 Just add it, no further configuration necessary.
 
-### Auto-Discovery
+### MQTT Thing Auto-Discovery
 
 The MQTT standard does not enforce any topic layout or topic value format. 
 A smart light vendor can decide to publish his lights under a "vendorname/deviceID/light" MQTT topic
@@ -141,8 +141,8 @@ People even disagree about the value format, sometimes it is *ON*, sometimes *1*
 That is why MQTT topic and format conventions got established amongst the DIY IoT community. 
 The new MQTT Things extension supports two conventions out-of-the-box:
 
-* The Homie 3.x specification: This vender neutral MQTT convention defines the layout of MQTT topics and the value format. It allows a full device capabilities discovery. 
-* The HomeAssistant MQTT Components specification: Some common components like a Light, a Switch, a Fan, an Air-Conditioner and so on are defined. More generic device capabilities cannot be expressed via this convention.
+* The [Homie 3.x specification](https://homieiot.github.io/): This vender neutral MQTT convention defines the layout of MQTT topics and the value format. It allows a full device capabilities discovery. 
+* The [HomeAssistant MQTT Components specification](https://www.home-assistant.io/docs/mqtt/discovery/): Some common components like a Light, a Switch, a Fan, an Air-Conditioner and so on are defined. More generic device capabilities cannot be expressed via this convention.
 
 Because the topic structure of a convention is known,
 the MQTT Things extension is able to provide auto-discovery and mapping of MQTT topics to openHAB Things and Channels.
@@ -151,7 +151,7 @@ the MQTT Things extension is able to provide auto-discovery and mapping of MQTT 
 
 If you setup your next DIY Home-Automation gadget, consider flashing it with a *Homie 3.x* compatible firmware and it will work with openHAB right away.
 
-### MQTT Things
+### MQTT Generic Things
 
 It cannot be stressed enough, to consider changing existing MQTT client devices to a MQTT convention like the mentioned *Homie 3.x* convention.
 That might not be possible in some cases though. 
